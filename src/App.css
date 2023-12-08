@@ -1,0 +1,12 @@
+/* Hide scrollbar for the specific div
+/* .scroll-container {
+  overflow: hidden;
+}
+
+.scroll-container::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+} */

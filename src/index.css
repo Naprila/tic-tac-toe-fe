@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide scrollbar for the specific div */
+.scroll-container {
+}
+
+/* Optional: You may want to use these styles to style the scrollbar for WebKit browsers (Chrome, Safari) */
+.scroll-container::-webkit-scrollbar {
+  width: 0.1px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
