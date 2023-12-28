@@ -14,3 +14,25 @@
 .scroll-container::-webkit-scrollbar-thumb {
   background-color: #888;
 }
+
+.winning {
+  position: relative;
+}
+
+.winning::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 5px; /* Adjust line thickness as needed */
+  background-color: red; /* Adjust line color as needed */
+  transform-origin: left;
+  animation: drawLine 0.5s ease-out forwards;
+}
+
+@keyframes drawLine {
+  to {
+    width: 100%;
+  }
+}
