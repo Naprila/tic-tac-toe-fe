@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { BoardType, checkWinner } from "../utils/winner";
 import useWebSocket from "../utils/useWebSocket";
 import { useNavigate, useParams } from "react-router-dom";
+import { serverUrl } from "../constant";
 
 export const Board = () => {
   const { webSocket } = useWebSocket();
@@ -28,18 +29,15 @@ export const Board = () => {
 
   const updateGameAsUnLive = async (gameId: string) => {
     try {
-      const res = await fetch(
-        `http://localhost:3000/game/updatelive/${gameId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            toUpdate: false,
-          }),
-        }
-      );
+      const res = await fetch(`${serverUrl}/game/updatelive/${gameId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          toUpdate: false,
+        }),
+      });
       if (res.status === 200) {
         console.log("GAME marked as unlive");
       }
@@ -50,12 +48,9 @@ export const Board = () => {
 
   const deleteGame = async (gameId: string) => {
     try {
-      const res = await fetch(
-        `http://localhost:3000/game/deletegame/${gameId}`,
-        {
-          method: "POST",
-        }
-      );
+      const res = await fetch(`${serverUrl}/game/deletegame/${gameId}`, {
+        method: "POST",
+      });
       const json = await res.json();
       if (res.status === 200) {
         console.log(json.msg);
@@ -114,7 +109,7 @@ export const Board = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/game/toggleturn/${id}/${localStorage.getItem(
+        `${serverUrl}/game/toggleturn/${id}/${localStorage.getItem(
           "User_Email"
         )}`,
         {
@@ -132,7 +127,7 @@ export const Board = () => {
 
   const updateTurn = async () => {
     try {
-      const res = await fetch(`http://localhost:3000/game/${id}`, {
+      const res = await fetch(`${serverUrl}/game/${id}`, {
         method: "GET",
       });
       const turn = await res.json();
@@ -147,9 +142,7 @@ export const Board = () => {
   const updateUserStart = async () => {
     try {
       const res = await fetch(
-        `http://localhost:3000/game/updatestart/${localStorage.getItem(
-          "User_Email"
-        )}`,
+        `${serverUrl}/game/updatestart/${localStorage.getItem("User_Email")}`,
         {
           method: "PUT",
         }
@@ -167,7 +160,7 @@ export const Board = () => {
 
   const checkGameStatus = async (gameId: string) => {
     try {
-      const res = await fetch(`http://localhost:3000/game/${gameId}`, {
+      const res = await fetch(`${serverUrl}/game/${gameId}`, {
         method: "GET",
       });
       if (res.status === 200) {

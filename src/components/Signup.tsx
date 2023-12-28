@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { serverUrl } from "../constant";
 
 const Signup = () => {
   const [username, setUsername] = useState<string>("");
@@ -10,7 +11,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleRegister = async () => {
-    const res = await fetch("http://localhost:3000/signup", {
+    const res = await fetch(`${serverUrl}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

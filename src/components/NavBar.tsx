@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { serverUrl } from "../constant";
 
 interface RequestItem {
   sender: string;
@@ -19,7 +20,7 @@ const NavBar = () => {
   const handleRequest = async (opp_email: string) => {
     const email = localStorage.getItem("User_Email");
     const res = await fetch(
-      `http://localhost:3000/delete_request/${email}/${opp_email}`,
+      `${serverUrl}/delete_request/${email}/${opp_email}`,
       {
         method: "POST",
       }
@@ -29,7 +30,7 @@ const NavBar = () => {
     // check if the user is online
 
     try {
-      const user_res = await fetch(`http://localhost:3000/me/${opp_email}`, {
+      const user_res = await fetch(`${serverUrl}/me/${opp_email}`, {
         method: "GET",
       });
       const user_json = await user_res.json();
@@ -38,7 +39,7 @@ const NavBar = () => {
         console.log("USER IS ONLINE");
         try {
           const assign_res = await fetch(
-            `http://localhost:3000/game/assignturn/${json.gameId}/${email}`,
+            `${serverUrl}/game/assignturn/${json.gameId}/${email}`,
             {
               method: "POST",
             }
@@ -77,7 +78,7 @@ const NavBar = () => {
   useEffect(() => {
     const intervalID = setInterval(async () => {
       const email = localStorage.getItem("User_Email");
-      const userDetails = await fetch(`http://localhost:3000/me/${email}`, {
+      const userDetails = await fetch(`${serverUrl}/me/${email}`, {
         method: "GET",
       });
       const json = await userDetails.json();

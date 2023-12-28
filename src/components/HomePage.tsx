@@ -3,6 +3,7 @@ import NavBar from "./NavBar";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { serverUrl } from "../constant";
 
 interface GameIDType {
   gameId: string;
@@ -18,7 +19,7 @@ const HomePage = () => {
     const sender_email = localStorage.getItem("User_Email");
     if (!sender_email) navigate("/signin");
     console.log(sender_email);
-    const res = await fetch("http://localhost:3000/send_request", {
+    const res = await fetch(`${serverUrl}/send_request`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -52,18 +53,15 @@ const HomePage = () => {
 
   const updateGameAsLive = async (gameId: GameIDType) => {
     try {
-      const res = await fetch(
-        `http://localhost:3000/game/updatelive/${gameId}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            toUpdate: true,
-          }),
-        }
-      );
+      const res = await fetch(`${serverUrl}/game/updatelive/${gameId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          toUpdate: true,
+        }),
+      });
       if (res.status === 200) {
         console.log("GAME marked as live");
       }
@@ -76,7 +74,7 @@ const HomePage = () => {
   useEffect(() => {
     const email = localStorage.getItem("User_Email");
     if (email === null) return;
-    fetch(`http://localhost:3000/update_status/${email}`, {
+    fetch(`${serverUrl}/update_status/${email}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -97,7 +95,7 @@ const HomePage = () => {
       const email = localStorage.getItem("User_Email");
       console.log("EMAIL: ", email);
       if (email === null) navigate("/signin");
-      const res = await fetch(`http://localhost:3000/me/${email}`, {
+      const res = await fetch(`${serverUrl}/me/${email}`, {
         method: "GET",
       });
 
