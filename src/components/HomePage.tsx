@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { serverUrl } from "../constant";
+import Lottie from "lottie-react";
+import tictactoeAnimation from "../assets/game.json";
 
 interface GameIDType {
   gameId: string;
@@ -119,7 +121,11 @@ const HomePage = () => {
   return (
     <div>
       <NavBar />
-      <div className="flex justify-center mt-20 gap-3">
+      <Lottie
+        animationData={tictactoeAnimation}
+        className="w-1/4 opacity-70 absolute left-1/3 top-56 "
+      />
+      <div className="flex justify-center mt-20 gap-3 z-10">
         <input
           className="px-2 py-1 border rounded-sm border-blue-500 outline-none w-1/4 focus:border-2"
           value={oppEmail}

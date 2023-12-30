@@ -329,7 +329,7 @@ export const Board = () => {
               Wait, it's Opp turn &#160;{" "}
             </div>
           )}
-          <div className="flex mt-36 gap-5 w-full justify-center h-16">
+          <div className="flex mt-36 gap-5 w-full justify-center h-16 z-10">
             <button
               className={`${
                 sign === "X" ? "text-lime-400" : "text-orange-400"

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { serverUrl } from "../constant";
+import msgImg from "../assets/msg.png";
 
 interface RequestItem {
   sender: string;
@@ -92,14 +93,17 @@ const NavBar = () => {
   }, []);
 
   return (
-    <div className="flex bg-lime-100 justify-between items-center px-3">
+    <div className="flex bg-cyan-100 justify-between items-center px-3 shadow-sm">
       <div className="p-3 relative flex">
-        <span
-          className="px-2 py-1 text-white rounded-md bg-red-500 hover:bg-red-700 cursor-pointer"
-          onClick={handleDropdownToggle}
-        >
-          {req.length}
-        </span>
+        <div className="flex">
+          <img src={msgImg} className="w-8 h-8 cursor" />
+          <span
+            className="px-1 text-white rounded-md bg-red-500 hover:bg-red-700 cursor-pointer absolute right-0 top-2"
+            onClick={handleDropdownToggle}
+          >
+            {req.length}
+          </span>
+        </div>
 
         {dropdownVisible && req.length > 0 && (
           <div className="absolute top-10  bg-white p-2 border border-gray-300 rounded-md shadow-md">
